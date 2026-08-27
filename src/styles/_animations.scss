@@ -1,0 +1,99 @@
+// Elegant, editorial wedding-invitation reveal animations.
+// Kept subtle: short duration, gentle easing, small travel distance.
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes rotate-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal-fade-in.is-visible { animation: fade-in 0.8s ease-out forwards; }
+.reveal-fade-up.is-visible { animation: fade-up 0.8s ease-out forwards; }
+.reveal-scale.is-visible { animation: scale-in 0.8s ease-out forwards; }
+.reveal-slide-left.is-visible { animation: slide-left 0.8s ease-out forwards; }
+.reveal-slide-right.is-visible { animation: slide-right 0.8s ease-out forwards; }
+
+// Heart-rain: spans are created imperatively (see useHeartRain), so this must stay global/unscoped.
+@keyframes heart-rain-fall {
+  0% {
+    transform: translate3d(0, -50px, 0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    transform: translate3d(30px, 30vh, 0) rotate(25deg);
+  }
+  60% {
+    transform: translate3d(-40px, 60vh, 0) rotate(-20deg);
+  }
+  80% {
+    transform: translate3d(30px, 80vh, 0) rotate(30deg);
+  }
+  100% {
+    transform: translate3d(-20px, 110vh, 0) rotate(-20deg);
+    opacity: 0;
+  }
+}
+
+.heart-rain {
+  position: fixed;
+  top: -50px;
+  z-index: 999999;
+  pointer-events: none;
+  animation: heart-rain-fall linear forwards;
+  filter: drop-shadow(0 2px 4px rgba(255, 0, 80, 0.25));
+}
