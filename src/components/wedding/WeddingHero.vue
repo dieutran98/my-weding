@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useInviteSide } from '../../composables/useInviteSide.ts'
 import { weddingData } from '../../data/wedding'
+import { parseDMYDate } from '../../utils/date'
 import WeddingMusic from './WeddingMusic.vue'
 
+const { side } = useInviteSide()
+const reception = computed(() => weddingData.ceremony.reception[side])
 const weddingDateLabel = new Intl.DateTimeFormat('vi-VN', {
   day: '2-digit',
   month: '2-digit',
   year: 'numeric',
-}).format(new Date(weddingData.weddingDate))
+}).format(parseDMYDate(reception.value.date))
 </script>
 
 <template>

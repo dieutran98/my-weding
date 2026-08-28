@@ -1,19 +1,24 @@
 <script setup lang="ts">
+import { computed } from 'vue'
+import { useInviteSide } from '../../composables/useInviteSide'
 import { useScrollReveal } from '../../composables/useScrollReveal'
 import { weddingData } from '../../data/wedding'
 
 const { target, isVisible } = useScrollReveal()
+const { side } = useInviteSide()
 
 // Prefix the saint name when present, e.g. "Giuse Trần Quang Diệu".
 const withSaintName = (saintName: string | undefined, name: string) =>
   [saintName, name].filter(Boolean).join(' ')
+
+const ceremonyLabel = computed(() => (side === 'bride' ? 'Lễ Vu Quy' : 'Lễ Tân Hôn'))
 </script>
 
 <template>
   <section id="couple" class="couple section">
     <div class="container text-center">
       <p class="eyebrow">Trân trọng báo tin</p>
-      <p class="couple__label">Lễ thành hôn của</p>
+      <p class="couple__label">{{ceremonyLabel}} của</p>
 
       <div
         ref="target"

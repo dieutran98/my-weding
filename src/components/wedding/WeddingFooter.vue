@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import { computed } from 'vue';
 import { weddingData } from '../../data/wedding'
+import { parseDMYDate } from '../../utils/date';
+import { useInviteSide } from '../../composables/useInviteSide'
+
+const { side } = useInviteSide()
+const reception = computed(() => weddingData.ceremony.reception[side])
 </script>
 
 <template>
   <footer class="wedding-footer">
     <p class="heading-script">{{ weddingData.groom.firstName }} &amp; {{ weddingData.bride.firstName }}</p>
-    <p class="wedding-footer__date">20.12.2026</p>
+    <p class="wedding-footer__date">{{reception.date}}</p>
     <p class="wedding-footer__thanks">Cảm ơn bạn đã ghé thăm thiệp cưới của chúng mình.</p>
   </footer>
 </template>
